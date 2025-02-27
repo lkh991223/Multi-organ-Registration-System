@@ -26,22 +26,6 @@ use_gpu = torch.cuda.is_available()
 
 
 threeorgan_save_quiver_path = './results/grid/'
-#save_grid_path = './new results_2/grid/'
-# threeorgan_save_quiver_path = './predict/grid/'
-# Bladder_save_quiver_path = './predict/Bladder_grid/'
-# Cervical_save_quiver_path = './predict/Cervical_grid/'
-# Rectum_save_quiver_path = './predict/Rectum_grid/'
-
-# import torch
-# import torchvision
-# import torch.nn as nn
-# import torch.nn.functional as F
-# import torch.optim as optim
-# from torch.autograd import Variable
-# import numpy as np
-# torch.manual_seed(42)
-# torch.cuda.manual_seed(42)
-# use_gpu = torch.cuda.is_available()
 
 class UNet2(nn.Module):
     def __init__(self, n_channels, n_classes, n_convnum=64 ,bilinear=True):
@@ -109,7 +93,6 @@ class VFF(nn.Module):
             nn.Linear(in_features = 8, out_features = 16, bias = False),
             nn.ReLU(),
             nn.Linear(in_features = 16, out_features = 24, bias = False)
-            #nn.Linear(in_features=16, out_features=6, bias=False)
         )
         self.sigmoid = nn.Sigmoid()
         self.lap = nn.Conv2d(in_channels=2, out_channels=8, kernel_size=5, stride=1, padding=2)
@@ -120,11 +103,7 @@ class VFF(nn.Module):
             # nn.ReLU(),
             nn.Conv2d(in_channels=64, out_channels=outchannels, kernel_size=1, stride=1, padding=0)
         )
-        # self.out_layers = nn.Sequential(
-        #     nn.Conv2d(in_channels=2, out_channels=16, kernel_size=1, stride=1, padding=0),
-        #     # nn.ReLU(),
-        #     nn.Conv2d(in_channels=16, out_channels=outchannels, kernel_size=1, stride=1, padding=0)
-        # )
+        
         self.conv = nn.Conv2d(in_channels=8, out_channels=outchannels, kernel_size=1, stride=1, padding=0)
     def forward(self, x1,x2,x3,sup):
         #b, _, _, _ = x1.shape
@@ -298,7 +277,7 @@ class noMMoE(nn.Module):
             bypass = F.pad(bypass, (-c, -c, -c, -c))
         return torch.cat((upsampled, bypass), 1)
 
-    # feature_dim:输入数据的维数  expert_dim:每个神经元输出的维数  n_expert:专家数量  n_task:任务数(gate数)
+    # feature_dim: input dim  expert_dim: dim of every output neuron  n_expert: number of expert,  n_task: number of tasks (gate number)
     def __init__(self):
         super(noMMoE, self).__init__()
 
@@ -597,15 +576,15 @@ class VoxelMorph2d(nn.Module):
 
         rand_field_norm = deformation_matrix[0, :, :, :]
         fig, ax = plt.subplots()
-        grid_x, grid_y = np.meshgrid(np.linspace(0, 190, 54), np.linspace(0, 320, 32))  # 生产网格大小
+        grid_x, grid_y = np.meshgrid(np.linspace(0, 190, 54), np.linspace(0, 320, 32))  
         plot_grid(ax, grid_x, grid_y, color="lightgrey")
-        distx = torch.from_numpy(grid_x).cuda() + rand_field_norm[0::6, 0::6, 0]  # 间隔取变形场
+        distx = torch.from_numpy(grid_x).cuda() + rand_field_norm[0::6, 0::6, 0]  
         disty = torch.from_numpy(grid_y).cuda() + rand_field_norm[0::6, 0::6, 1]
         plot_grid(ax, distx.cpu().detach().numpy(), disty.cpu().detach().numpy(), color="C0")
-        plt.xticks([])  # 去掉横坐标值
-        plt.yticks([])  # 去掉纵坐标值
+        plt.xticks([])  
+        plt.yticks([])  
         #plt.show()
-        plt.savefig(threeorgan_save_quiver_path + id[0] + '.png')  # 保存图像
+        plt.savefig(threeorgan_save_quiver_path + id[0] + '.png')  
 
         plt.cla()
         plt.close("all")
