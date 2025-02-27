@@ -24,21 +24,21 @@ class ThirdWindow(QMainWindow):
         self.image_path_mov = './results/moving image/158_16_test.png'
         self.grid = './results/grid/158_16.png'
 
-        self.setWindowTitle('配准结果展示')
+        self.setWindowTitle('Registration Results')
         self.setGeometry(100, 100, 700, 500)
         # 配准后各标签
-        mov_bladder_label = QLabel('膀胱参考图像')
+        mov_bladder_label = QLabel('Bladder Fixed Image')
         mov_bladder_label.setAlignment(Qt.AlignCenter)
         mov_bladder_label.setPixmap(QPixmap(self.bladder_image_path_mov).scaled(200, 200, Qt.KeepAspectRatio))
-        mov_cervical_label = QLabel('宫颈参考图像')
+        mov_cervical_label = QLabel('Cervix Fixed Image')
         mov_cervical_label.setAlignment(Qt.AlignCenter)
         mov_cervical_label.setPixmap(QPixmap(self.cervical_image_path_mov).scaled(200, 200, Qt.KeepAspectRatio))
-        mov_rectum_label = QLabel('直肠参考图像')
+        mov_rectum_label = QLabel('Rectum Fixed Image')
         mov_rectum_label.setAlignment(Qt.AlignCenter)
         mov_rectum_label.setPixmap(QPixmap(self.rectum_image_path_mov).scaled(200, 200, Qt.KeepAspectRatio))
 
         write_mov_label = QLabel(self)
-        write_mov_label.setText('配准后各器官标签图像如上')
+        write_mov_label.setText('The Registered Label Images of Each Organ are as shown above')
         write_mov_label.setAlignment(Qt.AlignCenter)
 
         mov_label_layout = QHBoxLayout()
@@ -52,15 +52,14 @@ class ThirdWindow(QMainWindow):
         mov_label_write_layout = QVBoxLayout()
         mov_label_write_layout.addLayout(mov_label_layout)
         mov_label_write_layout.addLayout(mov_write_layout)
-
-        # 参考各标签
-        ref_bladder_label = QLabel('膀胱参考图像')
+        
+        ref_bladder_label = QLabel('Bladder Fixed Image')
         ref_bladder_label.setAlignment(Qt.AlignCenter)
         ref_bladder_label.setPixmap(QPixmap(self.bladder_image_path).scaled(200, 200, Qt.KeepAspectRatio))
-        ref_cervical_label = QLabel('宫颈参考图像')
+        ref_cervical_label = QLabel('Cervix Fixed Image')
         ref_cervical_label.setAlignment(Qt.AlignCenter)
         ref_cervical_label.setPixmap(QPixmap(self.cervical_image_path).scaled(200, 200, Qt.KeepAspectRatio))
-        ref_rectum_label = QLabel('直肠参考图像')
+        ref_rectum_label = QLabel('Rectum Fixed Image')
         ref_rectum_label.setAlignment(Qt.AlignCenter)
         ref_rectum_label.setPixmap(QPixmap(self.rectum_image_path).scaled(200, 200, Qt.KeepAspectRatio))
 
@@ -70,7 +69,7 @@ class ThirdWindow(QMainWindow):
         ref_label_layout.addWidget(ref_rectum_label)
 
         write_ref_label = QLabel(self)
-        write_ref_label.setText('参考图像各器官标签图像如上')
+        write_ref_label.setText('The Reference Label Images of Each Organ are as shown above')
         write_ref_label.setAlignment(Qt.AlignCenter)
 
         ref_write_layout = QHBoxLayout()
@@ -80,40 +79,35 @@ class ThirdWindow(QMainWindow):
         ref_label_write_layout.addLayout(ref_label_layout)
         ref_label_write_layout.addLayout(ref_write_layout)
 
-        # 配准后图像
-        re_label = QLabel('配准后图像')
+        re_label = QLabel('Registered Image')
         re_label.setAlignment(Qt.AlignCenter)
         re_label.setPixmap(QPixmap(self.image_path_mov).scaled(300, 300, Qt.KeepAspectRatio))
 
         write_regist_label = QLabel(self)
-        write_regist_label.setText('配准后图像')
+        write_regist_label.setText('Registered Image')
         write_regist_label.setAlignment(Qt.AlignCenter)
 
-        # 形变场
-        grid = QLabel('形变场')
+        grid = QLabel('Grid')
         grid.setAlignment(Qt.AlignCenter)
         grid.setPixmap(QPixmap(self.grid).scaled(300, 300, Qt.KeepAspectRatio))
 
         write_grid = QLabel(self)
-        write_grid.setText('形变场')
+        write_grid.setText('Grid')
         write_grid.setAlignment(Qt.AlignCenter)
 
-        # 右边布局
+
         regist_layout = QVBoxLayout()
         regist_layout.addWidget(re_label)
         regist_layout.addWidget(write_regist_label)
         regist_layout.addWidget(grid)
         regist_layout.addWidget(write_grid)
 
-        # 按钮
-
-        button = QPushButton('获取指标')
+        button = QPushButton('Attain Merics')
         button_layout = QHBoxLayout()
         button_layout.addWidget(button)
 
         button.clicked.connect(lambda: self.results_calculate())
 
-        # 主布局
         ALL_layout = QHBoxLayout()
 
         main_layout = QVBoxLayout()
@@ -218,8 +212,8 @@ class ThirdWindow(QMainWindow):
         average_ASD_rectum = rectum_a
         average_MI_rectum = rectum_mi
 
-        # 信息框
-        QMessageBox.information(self, '指标结果', "the average_dice_bladder is:" + str(average_dice_bladder) + "\nthe average_MI_bladder is:" + str(average_MI_bladder) + "\nthe average_ASD_bladder is:" + str(average_ASD_bladder) + "the average_dice_cervical is:" + str(average_dice_cervical) + "\nthe average_MI_cervical is:" + str(average_MI_cervical) + "\nthe average_ASD_cervical is:" + str(average_ASD_cervical) + "the average_dice_rectum is:" + str(average_dice_rectum) + "\nthe average_MI_rectum is:" + str(average_MI_rectum) + "\nthe average_ASD_rectum is:" + str(average_ASD_rectum), QMessageBox.Yes|QMessageBox.No,QMessageBox.Yes)
+
+        QMessageBox.information(self, 'Metrics Results', "the average_dice_bladder is:" + str(average_dice_bladder) + "\nthe average_MI_bladder is:" + str(average_MI_bladder) + "\nthe average_ASD_bladder is:" + str(average_ASD_bladder) + "the average_dice_cervical is:" + str(average_dice_cervical) + "\nthe average_MI_cervical is:" + str(average_MI_cervical) + "\nthe average_ASD_cervical is:" + str(average_ASD_cervical) + "the average_dice_rectum is:" + str(average_dice_rectum) + "\nthe average_MI_rectum is:" + str(average_MI_rectum) + "\nthe average_ASD_rectum is:" + str(average_ASD_rectum), QMessageBox.Yes|QMessageBox.No,QMessageBox.Yes)
 
 
 class SecondWindow(QMainWindow):
@@ -227,15 +221,15 @@ class SecondWindow(QMainWindow):
         super().__init__()
         self.ref_fname = ref_fname
         self.mov_fname = mov_fname
-        self.setWindowTitle('处理后的图像展示')
+        self.setWindowTitle('Processed Images')
         self.setGeometry(100, 100, 500, 300)
 
 
-        ref_image_label = QLabel('参考图像')
+        ref_image_label = QLabel('Fixed Image')
         ref_image_label.setAlignment(Qt.AlignCenter)
         ref_image_label.setPixmap(QPixmap(ref_fname).scaled(200, 200, Qt.KeepAspectRatio))
 
-        float_image_label = QLabel('浮动图像')
+        float_image_label = QLabel('Moving Image')
         float_image_label.setAlignment(Qt.AlignCenter)
         float_image_label.setPixmap(QPixmap(mov_fname).scaled(200, 200, Qt.KeepAspectRatio))
 
@@ -244,79 +238,68 @@ class SecondWindow(QMainWindow):
         image_layout.addWidget(float_image_label)
 
 
-        # ref_labels选择
-        # 创建三个图像标签
-        self.bladder_image_label = QLabel('膀胱标签图像')
+        # ref_labels
+        self.bladder_image_label = QLabel('Bladder Fixed Label Image')
         self.bladder_image_label.setAlignment(Qt.AlignCenter)
-        self.cervical_image_label = QLabel('宫颈标签图像')
+        self.cervical_image_label = QLabel('Cervix Fixed Label Image')
         self.cervical_image_label.setAlignment(Qt.AlignCenter)
-        self.rectum_image_label = QLabel('直肠标签图像')
+        self.rectum_image_label = QLabel('Rectum Fixed Label Image')
         self.rectum_image_label.setAlignment(Qt.AlignCenter)
 
-        # 创建按钮
-        select_bladder_button = QPushButton('选择参考膀胱标签')
-        select_cervical_button = QPushButton('选择参考宫颈标签')
-        select_rectum_button = QPushButton('选择参考直肠标签')
 
-        # 绑定按钮点击事件
+        select_bladder_button = QPushButton('Select Fixed Bladder Label Image')
+        select_cervical_button = QPushButton('Select Fixed CervixLabel Image')
+        select_rectum_button = QPushButton('Select Fixed Rectum Label Image')
+
+
         select_bladder_button.clicked.connect(lambda: self.chooserefImage('bladder'))
         select_cervical_button.clicked.connect(lambda: self.chooserefImage('cervical'))
         select_rectum_button.clicked.connect(lambda: self.chooserefImage('rectum'))
 
-
-        # 图像选择区域布局
+        
         image_selection_layout = QHBoxLayout()
         image_selection_layout.addWidget(self.bladder_image_label)
         image_selection_layout.addWidget(self.cervical_image_label)
         image_selection_layout.addWidget(self.rectum_image_label)
 
-        # 功能按钮布局
         buttons_layout = QHBoxLayout()
         buttons_layout.addWidget(select_bladder_button)
         buttons_layout.addWidget(select_cervical_button)
         buttons_layout.addWidget(select_rectum_button)
 
-        #mov_label选择区域
-
-        # 创建三个图像标签
-        self.bladder_image_label_2 = QLabel('膀胱标签图像')
+        self.bladder_image_label_2 = QLabel('Bladder Moving Label Image')
         self.bladder_image_label_2.setAlignment(Qt.AlignCenter)
-        self.cervical_image_label_2 = QLabel('宫颈标签图像')
+        self.cervical_image_label_2 = QLabel('Cervix Moving Label Image')
         self.cervical_image_label_2.setAlignment(Qt.AlignCenter)
-        self.rectum_image_label_2 = QLabel('直肠标签图像')
+        self.rectum_image_label_2 = QLabel('Rectum Moving Label Image')
         self.rectum_image_label_2.setAlignment(Qt.AlignCenter)
 
-        # 创建按钮
-        select_bladder_button_2 = QPushButton('选择浮动膀胱标签')
-        select_cervical_button_2 = QPushButton('选择浮动宫颈标签')
-        select_rectum_button_2 = QPushButton('选择浮动直肠标签')
+        select_bladder_button_2 = QPushButton('Select Moving Bladder Label Image')
+        select_cervical_button_2 = QPushButton('Select Moving Cervix Label Image')
+        select_rectum_button_2 = QPushButton('Select Moving Rectum Label Image')
 
 
-        # 绑定按钮点击事件
         select_bladder_button_2.clicked.connect(lambda: self.choosemovImage('bladder'))
         select_cervical_button_2.clicked.connect(lambda: self.choosemovImage('cervical'))
         select_rectum_button_2.clicked.connect(lambda: self.choosemovImage('rectum'))
 
 
-        # 图像选择区域布局
         image_selection_layout_2 = QHBoxLayout()
         image_selection_layout_2.addWidget(self.bladder_image_label_2)
         image_selection_layout_2.addWidget(self.cervical_image_label_2)
         image_selection_layout_2.addWidget(self.rectum_image_label_2)
 
-        # 功能按钮布局
         buttons_layout_2 = QHBoxLayout()
         buttons_layout_2.addWidget(select_bladder_button_2)
         buttons_layout_2.addWidget(select_cervical_button_2)
         buttons_layout_2.addWidget(select_rectum_button_2)
 
-        # 点击配准
-        button = QPushButton('点击配准')
+        button = QPushButton('Click to start Registration')
         button.clicked.connect(self.register)
         firstbutton = QHBoxLayout()
         firstbutton.addWidget(button)
 
-        # 主布局
+        
         main_layout = QVBoxLayout()
         main_layout.addLayout(image_layout)
         main_layout.addLayout(image_selection_layout)
@@ -324,18 +307,16 @@ class SecondWindow(QMainWindow):
         main_layout.addLayout(image_selection_layout_2)
         main_layout.addLayout(buttons_layout_2)
         main_layout.addLayout(firstbutton)
-        # # 将标签添加到布局
         # main_layout.addWidget(self.ref_image_label)
         # main_layout.addWidget(self.float_image_label)
 
-        # 设置中心部件
+
         central_widget = QWidget()
         central_widget.setLayout(main_layout)
         self.setCentralWidget(central_widget)
 
-    # 接收图像路径信号并在标签上设定它
     def chooserefImage(self, image_type):
-        fname, _ = QFileDialog.getOpenFileName(self, '选择图像', '', '图像文件 (*.png *.jpeg *.jpg *.bmp *.gif)')
+        fname, _ = QFileDialog.getOpenFileName(self, 'Select Image', '', 'Image files (*.png *.jpeg *.jpg *.bmp *.gif)')
         if fname:
             if image_type == 'bladder':
                 self.bladder_image_path = fname
@@ -348,7 +329,7 @@ class SecondWindow(QMainWindow):
                 self.rectum_image_label.setPixmap(QPixmap(fname).scaled(200, 200, Qt.KeepAspectRatio))
 
     def choosemovImage(self, image_type):
-        fname, _ = QFileDialog.getOpenFileName(self, '选择图像', '', '图像文件 (*.png *.jpeg *.jpg *.bmp *.gif)')
+        fname, _ = QFileDialog.getOpenFileName(self, 'Select Image', '', 'Image files (*.png *.jpeg *.jpg *.bmp *.gif)')
         if fname:
             if image_type == 'bladder':
                 self.bladder_image_path_2 = fname
@@ -374,7 +355,6 @@ class SecondWindow(QMainWindow):
     #     self.float_image_label.setPixmap(QPixmap(image_path).scaled(200, 200, Qt.KeepAspectRatio))
 
 
-# 请自行实现以下方法
 
 
 
@@ -382,54 +362,48 @@ class FirstWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle('图像选择与处理')
+        self.setWindowTitle('Image Select and Process')
         self.setGeometry(100, 100, 500, 300)
 
         self.ref_image_path = ''
         self.float_image_path = ''
 
-        # 创建两个图像标签
-        self.ref_image_label = QLabel('参考图像选择区域')
+        self.ref_image_label = QLabel('Fixed Image')
         self.ref_image_label.setAlignment(Qt.AlignCenter)
-        self.float_image_label = QLabel('浮动图像选择区域')
+        self.float_image_label = QLabel('Moving Image')
         self.float_image_label.setAlignment(Qt.AlignCenter)
 
-        # 创建按钮
-        select_ref_button = QPushButton('选择参考图像')
-        select_float_button = QPushButton('选择浮动图像')
-        normalize_button = QPushButton('归一化与标准化')
+        select_ref_button = QPushButton('Select Fixed Image')
+        select_float_button = QPushButton('Select Moving Image')
+        normalize_button = QPushButton('Normalization and Standardization')
 
 
-        # 绑定按钮点击事件
         select_ref_button.clicked.connect(lambda: self.chooseImage('ref'))
         select_float_button.clicked.connect(lambda: self.chooseImage('float'))
         normalize_button.clicked.connect(self.onNormalize)
 
 
-        # 图像选择区域布局
         image_selection_layout = QVBoxLayout()
         image_selection_layout.addWidget(self.ref_image_label)
         image_selection_layout.addWidget(self.float_image_label)
 
-        # 功能按钮布局
         buttons_layout = QHBoxLayout()
         buttons_layout.addWidget(select_ref_button)
         buttons_layout.addWidget(select_float_button)
         buttons_layout.addWidget(normalize_button)
 
-
-        # 主布局
+        
         main_layout = QVBoxLayout()
         main_layout.addLayout(image_selection_layout)
         main_layout.addLayout(buttons_layout)
 
-        # 设置到中心小部件
+
         central_widget = QWidget()
         central_widget.setLayout(main_layout)
         self.setCentralWidget(central_widget)
 
     def chooseImage(self, image_type):
-        fname, _ = QFileDialog.getOpenFileName(self, '选择图像', '', '图像文件 (*.png *.jpeg *.jpg *.bmp *.gif)')
+        fname, _ = QFileDialog.getOpenFileName(self, 'Select Image', '', 'Image File (*.png *.jpeg *.jpg *.bmp *.gif)')
         if fname:
             if image_type == 'ref':
                 self.ref_image_path = fname
@@ -441,17 +415,16 @@ class FirstWindow(QMainWindow):
     def onNormalize(self):
         if self.ref_image_path != '' and self.float_image_path != '':
             self.normalize(self.ref_image_path, self.float_image_path)
-        # 实现后续逻辑...
+       
 
     def normalize(self, ref_image_path, float_image_path):
-        # 图像标准化处理的实现
+        
         self.second_win = SecondWindow(ref_image_path, float_image_path)
         self.close()
         self.second_win.show()
 
 
 
-# ...（省略二界面的代码）
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
