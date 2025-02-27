@@ -23,7 +23,7 @@ class ImageWindow(QWidget):
         self.setCentralWidget(central_widget)
 
         # Create image display widget
-        self.label1 = QLabel('以下为标准化归一化后参考图像和浮动图像:', self)
+        self.label1 = QLabel('The following are the fixed image and the moving image after standardization and normalization.:', self)
 
         self.ref = QLabel()
         self.layout.addWidget(self.ref)
@@ -62,15 +62,15 @@ class ImageWindow(QWidget):
         # self.hbox_layout2.addWidget(self.image_label2)
         # self.hbox_layout2.addWidget(self.image_label3)
 
-        self.btn1 = QPushButton('上传膀胱标签')
+        self.btn1 = QPushButton('Upload Bladder Label')
         self.btn1.clicked.connect(self.load_image1)
         # self.layout.addWidget(self.btn1)
 
-        self.btn2 = QPushButton('上传宫颈标签')
+        self.btn2 = QPushButton('Upload Cervix Label')
         self.btn2.clicked.connect(self.load_image2)
         # self.layout.addWidget(self.btn2)
 
-        self.btn3 = QPushButton('上传直肠标签')
+        self.btn3 = QPushButton('Upload Rectum Label')
         self.btn3.clicked.connect(self.load_image3)
         # self.layout.addWidget(self.btn3)
 
@@ -80,7 +80,7 @@ class ImageWindow(QWidget):
 
         self.central_widget.setLayout(self.hbox_layout1)
 
-        self.label2 = QLabel('请上传参考图像各标签', self)
+        self.label2 = QLabel('Please Upload Fxied Image Label', self)
         self.layout.addWidget(self.label2)
 
         self.show()
@@ -111,11 +111,11 @@ class MyApp(QWidget):
 
     def initUI(self):
         vbox = QVBoxLayout()
-        btn1 = QPushButton('选择参考图像', self)
+        btn1 = QPushButton('Select Fixed Image', self)
         btn1.clicked.connect(self.load_ref_image)
-        btn2 = QPushButton('选择浮动图像', self)
+        btn2 = QPushButton('Select Moving Image', self)
         btn2.clicked.connect(self.load_float_image)
-        btn3 = QPushButton('归一化与标准化', self)
+        btn3 = QPushButton('Normalization and Standardization', self)
         btn3.clicked.connect(self.normalizestandardize)
 
 
@@ -127,7 +127,7 @@ class MyApp(QWidget):
 
         self.setLayout(vbox)
 
-        self.setWindowTitle('欢迎使用跨模态多器官配准系统')
+        self.setWindowTitle('Welcome to the Cross-Modality Multi-Organ Registration System')
         self.setGeometry(300, 300, 600, 400)
         self.show()
 
