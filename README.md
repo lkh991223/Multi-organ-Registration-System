@@ -36,6 +36,18 @@ This is a cross-modal registration system for multi-organ images, supporting reg
 5. **View Results**: After registration, the system will display the registered images, deformation fields, and evaluation metrics.
 
 
+## Representation
+![welcome image](figs/1.png)
+
+![welcome image](figs/2.png)
+
+![welcome image](figs/3.png)
+
+![welcome image](figs/4.png)
+
+![welcome image](figs/5.png)
+
+![welcome image](figs/6.png)
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
