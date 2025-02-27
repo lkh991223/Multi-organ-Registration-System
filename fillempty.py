@@ -11,18 +11,18 @@ rectum_image_path_mov = './results/moving rectum image/158_16_test.png'
 
 def remove_small_points(binary_img, threshold_area):
     """
-    消除二值图像中面积小于某个阈值的连通域(消除孤立点)
+    Remove connected components in a binary image with an area smaller than a certain threshold (eliminate isolated points)
     args:
-        binary_img: 二值图
-        threshold_area: 面积条件大小的阈值,大于阈值保留,小于阈值过滤
+        binary_img: Binary image
+        threshold_area: The threshold for the area condition. Connected components larger than the threshold are retained, while those smaller than the threshold are filtered out
     return:
-        resMatrix: 消除孤立点后的二值图
+        resMatrix: The binary image after eliminating isolated points
     """
-    # 输出二值图像中所有的连通域
+    # Output all connected components in a binary image
     img_label, num = label(binary_img, connectivity=1, background=0,
                            return_num=True)  # connectivity=1--4  connectivity=2--8
     # print('+++', num, img_label)
-    # 输出连通域的属性，包括面积等
+    # Output properties of connected components in a binary image, including area, etc.
     props = regionprops(img_label)
     ## adaptive threshold
     # props_area_list = sorted([props[i].area for i in range(len(props))])
@@ -32,7 +32,7 @@ def remove_small_points(binary_img, threshold_area):
         print('--', props[i].area)
         if props[i].area > threshold_area:
             tmp = (img_label == i + 1).astype(np.uint8)
-            # 组合所有符合条件的连通域
+            # Combine all connected components that meet the criteria
             resMatrix += tmp
     resMatrix *= 255
 
